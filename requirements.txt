@@ -1,0 +1,13 @@
+streamlit
+gitpython
+PyGithub
+langchain
+langchain-community
+sentence-transformers
+faiss-cpu
+transformers
+torch
+requests
+python-dotenv
+beautifulsoup4
+markdown 

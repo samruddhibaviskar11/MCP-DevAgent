@@ -1,0 +1,150 @@
+You're an autonomous AI Git agent (MCP Agent) designed to assist developers working on large open-source Python projects. Your task is to deeply integrate with a GitHub repository and streamline the full development workflow. The repository uses FastAPI, Streamlit, and optionally Airflow or Prefect.
+ 
+Your goal is to help build a Minimum Lovable Product (MLP) for an AI-powered DevOps assistant. Focus on improving contribution workflows, release preparation, changelog generation, CI/CD debugging, and context-aware commenting.
+ 
+Here are your specific responsibilities:
+ 
+1. 🔁 **Repo Connection**
+   - Clone and scan the structure of the repo.
+   - Identify language, frameworks, linters, and config files.
+   - Create embeddings or summaries of code structure (models, routes, services, workflows, etc).
+ 
+2. 🧾 **Issue Understanding and Enhancement**
+   - Given an issue or enhancement ticket, break it into subtasks.
+   - Recommend files to edit, functions to change, tests to write.
+   - Generate a code plan and validate architecture decisions.
+ 
+3. 🧠 **Code Suggestion & Debugging**
+   - If code fails CI, suggest fixes.
+   - Auto-insert docstrings and comments based on file context.
+   - Recommend missing test cases or validation.
+ 
+4. 🔧 **Pull Request Assistant**
+   - Generate PR descriptions automatically.
+   - Suggest meaningful titles and commit messages.
+   - Add a checklist and reviewer suggestions.
+ 
+5. 📦 **Release Manager**
+   - Based on merged PRs, create release notes.
+   - Detect breaking changes.
+   - Auto-update version in pyproject.toml or setup.py.
+ 
+6. 🔍 **Interactive CLI Agent (Optional)**
+   - Implement a local CLI using `Typer` or `Click` to:
+     - Ask questions like “Why did this PR fail?”
+     - Auto-fix failing linters.
+     - Run tests selectively based on change summary.
+ 
+7. 📊 **Dashboard (Optional Streamlit Component)**
+   - Show all enhancement tickets.
+   - PR status, code coverage, recent merges.
+   - Copilot suggestions inline.
+ 
+🛠️ Tools you can use:
+- LangChain or LlamaIndex for local context retrieval
+- GitHub API for PR, CI, release info
+- Black, Ruff, Pytest for linting and testing
+- Python Fire / Typer for command line interactions
+- SQLite/JSON for storing session history and plans
+ 
+🎯 Goal:
+To demonstrate an MVP of an MCP Agent that can assist a solo open-source developer or a small team in accelerating contributions, catching issues early, and automating releases.
+ 
+🎯 Deadline: 6th August (2 days). Prioritize core pipeline: read repo → summarize enhancement → generate patch → suggest PR.
+
+
+Build a GitHub-Aware MCP Agent: AI Assistant for Devs
+You are an AI developer helping me create an open-source developer assistant called MCP Agent. This is a GitHub-native AI agent that reads repositories, understands open issues, suggests or implements fixes, and can automate the process of opening pull requests, resolving CI failures, and summarizing changes — all through a Streamlit UI and LangChain backend.
+Your job is to generate a working prototype with the following requirements:
+🧩 Features to Implement:
+1. Streamlit UI Interface
+A basic UI with:
+Chat window for natural language prompts.
+Option to paste GitHub repo URL.
+Display current issues, commits, and status of CLI (via GitHub Checks API if possible).
+Show PR suggestions and edits.
+2. GitHub Integration
+Clone GitHub repo (via Git Repo Loader).
+Use GitHub API to:
+Fetch open issues.
+Create branches and PRs from suggested code fixes.
+Monitor CI status for each PR.
+3. LangChain QA Agent
+Use LangChain to:
+Load vector DB (FAISS + OpenAI Embeddings) of the repo: code files, README, logs.
+Answer questions like:
+"Why is the CI not passing?"
+"What’s the bug in issue #21?"
+"Plan a fix for this feature."
+Generate fix plans, optionally apply them.
+4. FAISS + Embeddings
+Vectorize:
+All .py, .md, .yaml, .txt files.
+Log files like GitHub Action logs.
+README and contributing guidelines.
+Store in FAISS index with OpenAI or local embeddings.
+5. Code Suggestion + Auto-Fix Agent
+Accept prompts like:
+“Fix the issue with green button not loading”
+“My CLI test is failing, help debug”
+“Add logging to this function”
+Generate patch suggestion + commit + PR.
+Optional: Include test case generation.
+6. CI Integration (Stretch goal)
+Fetch GitHub Actions logs.
+Parse error reasons and propose fixes (e.g., missing pytest, env issues).
+Summarize failure and possible solutions.
+📦 Tech Stack
+Layer	Tech Used
+UI	Streamlit
+Core Logic	LangChain
+Embedding	OpenAI (or HuggingFace alt)
+Vector Store	FAISS
+GitHub Interaction	PyGitHub / Git CLI / GraphQL API
+LLM Agent Logic	LangChain (Tool + Agent)
+Optional Logging	Loguru, Streamlit Logging
+ 
+📈 Deliverables by August 6:
+A working Streamlit-based MCP prototype.
+Working:
+GitHub cloning
+Issue loading
+Vector index generation
+Agent responses based on issue
+Code suggestion for small bug
+Create PR from fix
+Clear logs / error handling.
+🔌 Bonus Ideas (Post-MVP or Stretch)
+RAG with commit history (per file).
+Allow local repo path (not only GitHub).
+Multi-modal support (paste screenshot of bug log).
+Live terminal for testing fixes.
+Agent chain planner (plan + execute steps like "fix broken button").
+🧠 Diagram (Feed to system prompt or Markdown Viewer)
+textCopyEdit+--------------------------+
+|     Streamlit UI        |
+|  (Chat / Repo / Issues) |
++-----------+-------------+
+            |
+            v
++-----------+-------------+      ↕ GitHub API
+|  LangChain QA Chain     | <-->  - fetch issues
+| (Ask repo / Plan fix)   |       - create PR
++-----------+-------------+       - fetch commits
+            |
+            v
++-----------+-------------+
+| Vector Store (FAISS)    |
+|  + OpenAI Embeddings    |
+|  + Code/Logs/Readme     |
++-----------+-------------+
+            ^
+            |
++-----------+-------------+
+| Git Repo Loader         |
+|  - Clones repo          |
+|  - Loads .py/.md/.yaml  |
++-------------------------+
+📎 Where to Feed This
+
+ 
