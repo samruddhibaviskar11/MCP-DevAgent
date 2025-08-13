@@ -1,13 +1,32 @@
-streamlit
-gitpython
-PyGithub
-langchain
-langchain-community
-sentence-transformers
-faiss-cpu
-transformers
-torch
-requests
-python-dotenv
-beautifulsoup4
-markdown 
+# Core Streamlit application
+streamlit>=1.28.0
+
+# Git operations
+gitpython>=3.1.30
+
+# GitHub API integration
+PyGithub>=1.59.0
+
+# AI/ML for embeddings and search
+sentence-transformers>=2.2.2
+faiss-cpu>=1.7.4
+numpy>=1.21.0
+
+# Environment management
+python-dotenv>=1.0.0
+
+# Enhanced development tools
+pandas>=1.5.0  # For data display in Streamlit
+requests>=2.28.0  # For API calls
+pathlib2>=2.3.7; python_version < "3.6"  # Path handling compatibility
+
+# Optional AI service integrations (uncomment to use)
+# openai>=1.0.0
+# anthropic>=0.3.0
+# langchain>=0.1.0
+# langchain-openai>=0.1.0
+
+# Development and testing (optional)
+# pytest>=7.0.0
+# black>=22.0.0
+# flake8>=5.0.0 
